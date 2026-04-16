@@ -32,6 +32,10 @@ export function goToEditor(scenarioId?: string) {
 	view = 'editor';
 }
 
+export function toggleJson() {
+	showJson = !showJson;
+}
+
 export function resetInterpreter() {
 	editorMap = { ...activeScenario.interpreter.map };
 }

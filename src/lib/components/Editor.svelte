@@ -6,6 +6,7 @@
 		output,
 		showJson,
 		selectScenario,
+		toggleJson,
 		resetInterpreter,
 		navigateTo,
 	} from '$lib/composables/stores.svelte';
@@ -65,7 +66,7 @@
 
 		<button
 			class="cursor-pointer px-3 py-2 text-left text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80"
-			onclick={() => (showJson = !showJson)}
+			onclick={toggleJson}
 			aria-expanded={showJson}
 		>
 			⟨/⟩ {showJson ? 'ซ่อน' : 'ดู'} JSON
