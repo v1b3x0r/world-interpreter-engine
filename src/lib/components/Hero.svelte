@@ -91,4 +91,22 @@
 		<span>ยังไม่รู้จัก? เริ่มจากตรงนี้</span>
 		<span>รู้แล้ว? ข้ามไปเล่นเลย</span>
 	</div>
+
+	<!-- Footer -->
+	<footer
+		class="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-6 px-6 py-6 text-[11px] text-[var(--wl-text-muted)]"
+		style="opacity: 0.5;"
+	>
+		<span>World Log Engine is open source</span>
+		<span style="opacity: 0.3;">·</span>
+		<a
+			href="https://viibe.to/homelog"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="transition-opacity hover:opacity-100"
+			style="color: var(--wl-accent); opacity: 0.7;"
+		>
+			viibe.to/homelog
+		</a>
+	</footer>
 </div>
