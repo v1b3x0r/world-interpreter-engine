@@ -30,8 +30,7 @@
 	<div class="mx-auto grid w-full max-w-2xl grid-cols-2 gap-px" style="background: var(--wl-border);">
 		{#each scenarioList as scenario, i (scenario.id)}
 			<button
-				class="cursor-pointer p-7 text-left transition-colors hover:bg-[var(--wl-accent-glow)]
-					{i === scenarioList.length - 1 && scenarioList.length % 2 !== 0 ? 'col-span-2 text-center' : ''}"
+				class="cursor-pointer p-7 text-left transition-colors hover:bg-[var(--wl-accent-glow)]"
 				style="background: var(--wl-bg);"
 				in:fade={{ duration: prefersReducedMotion ? 0 : 150, delay: i * 50 }}
 				onclick={() => pick(scenario.id)}
