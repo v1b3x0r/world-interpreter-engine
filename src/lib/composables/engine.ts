@@ -1,17 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function render(events: any[], interpreter: any) {
-	return events
-		.map((e) => {
-			const template = interpreter?.map?.[e.type];
-			if (!template) return null;
+import type { WorldEvent, Interpreter, RenderedEvent } from './scenarios/types';
 
-			const duration = e.duration_sec ? Math.round(e.duration_sec / 60) : e.duration_min;
+export function render(events: WorldEvent[], interpreter: Interpreter): RenderedEvent[] {
+	return events.map((e) => {
+		const template = interpreter.map?.[e.type];
+		const duration = e.duration_min;
+		const text = template
+			? template
+					.replace('{actor}', e.actor ?? '')
+					.replace('{device}', e.device ?? '')
+					.replace('{zone}', e.zone ?? '')
+					.replace('{duration_min}', String(duration ?? ''))
+			: `[no template for ${e.type}]`;
 
-			return template
-				.replace('{actor}', e.actor || '')
-				.replace('{device}', e.device || '')
-				.replace('{zone}', e.zone || '')
-				.replace('{duration_min}', duration || '');
-		})
-		.filter(Boolean);
+		return {
+			text,
+			type: e.type,
+			timestamp: e.timestamp,
+			severity: e.severity ?? 'normal',
+		};
+	});
 }
