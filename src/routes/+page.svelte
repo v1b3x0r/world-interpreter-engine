@@ -1,8 +1,8 @@
 <script lang="ts">
 	import {
-		view,
-		activeScenario,
-		output,
+		appStore,
+		getActiveScenario,
+		getOutput,
 		navigateTo,
 		goToEditor,
 	} from '$lib/composables/stores.svelte';
@@ -12,11 +12,13 @@
 	import Editor from '$lib/components/Editor.svelte';
 </script>
 
-{#if view === 'hero'}
+{#if appStore.view === 'hero'}
 	<Hero />
-{:else if view === 'picker'}
+{:else if appStore.view === 'picker'}
 	<ScenarioPicker />
-{:else if view === 'timeline'}
+{:else if appStore.view === 'timeline'}
+	{@const activeScenario = getActiveScenario()}
+	{@const output = getOutput()}
 	<div class="flex min-h-screen flex-col px-6 py-8" style="background: var(--wl-bg);">
 		<button
 			class="mb-6 cursor-pointer self-start text-sm text-(--wl-text-muted) transition-opacity hover:opacity-80"
@@ -52,6 +54,6 @@
 			</button>
 		</div>
 	</div>
-{:else if view === 'editor'}
+{:else if appStore.view === 'editor'}
 	<Editor />
 {/if}

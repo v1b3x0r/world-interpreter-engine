@@ -1,10 +1,8 @@
 <script lang="ts">
 	import {
-		activeScenario,
-		activeScenarioId,
-		editorMap,
-		output,
-		showJson,
+		appStore,
+		getActiveScenario,
+		getOutput,
 		selectScenario,
 		toggleJson,
 		resetInterpreter,
@@ -15,6 +13,9 @@
 	import Timeline from './Timeline.svelte';
 	import TemplateField from './TemplateField.svelte';
 	import VariableChips from './VariableChips.svelte';
+
+	const activeScenario = $derived(getActiveScenario());
+	const output = $derived(getOutput());
 
 	function handleInsert(variable: string) {
 		const activeEl = document.activeElement;
@@ -27,7 +28,7 @@
 
 			const typeAttr = activeEl.closest('[data-type]')?.getAttribute('data-type');
 			if (typeAttr) {
-				editorMap[typeAttr] = newVal;
+				appStore.editorMap[typeAttr] = newVal;
 			}
 
 			requestAnimationFrame(() => {
@@ -41,7 +42,7 @@
 <div class="flex h-screen" style="background: var(--wl-bg);">
 	<!-- Sidebar -->
 	<div
-		class="flex w-[200px] flex-shrink-0 flex-col border-r p-4"
+		class="flex w-50 shrink-0 flex-col border-r p-4"
 		style="border-color: var(--wl-border); background: rgba(0,0,0,0.15);"
 	>
 		<div class="mb-3 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
@@ -51,8 +52,8 @@
 		{#each scenarioList as scenario (scenario.id)}
 			<button
 				class="mb-1 flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors"
-				class:text-[var(--wl-accent)]={activeScenarioId === scenario.id}
-				style={activeScenarioId === scenario.id
+				class:text-[var(--wl-accent)]={appStore.activeScenarioId === scenario.id}
+				style={appStore.activeScenarioId === scenario.id
 					? 'background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.15);'
 					: 'opacity: 0.4; border: 1px solid transparent;'}
 				onclick={() => selectScenario(scenario.id)}
@@ -67,9 +68,9 @@
 		<button
 			class="cursor-pointer px-3 py-2 text-left text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80"
 			onclick={toggleJson}
-			aria-expanded={showJson}
+			aria-expanded={appStore.showJson}
 		>
-			⟨/⟩ {showJson ? 'ซ่อน' : 'ดู'} JSON
+			⟨/⟩ {appStore.showJson ? 'ซ่อน' : 'ดู'} JSON
 		</button>
 
 		<button
@@ -100,9 +101,9 @@
 				<div data-type={meta.type}>
 					<TemplateField
 						{meta}
-						value={editorMap[meta.type] ?? ''}
+						value={appStore.editorMap[meta.type] ?? ''}
 						onchange={(val) => {
-							editorMap[meta.type] = val;
+							appStore.editorMap[meta.type] = val;
 						}}
 					/>
 				</div>
@@ -113,7 +114,7 @@
 			<VariableChips oninsert={handleInsert} />
 		</div>
 
-		{#if showJson}
+		{#if appStore.showJson}
 			<div class="mt-5">
 				<div class="mb-2 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
 					▸ Raw JSON
@@ -121,13 +122,13 @@
 				<pre
 					class="overflow-auto rounded-lg p-4 font-mono text-xs text-(--wl-text-muted)"
 					style="background: rgba(0,0,0,0.3);"
-				>{JSON.stringify({ events: activeScenario.events, interpreter: { map: editorMap } }, null, 2)}</pre>
+				>{JSON.stringify({ events: activeScenario.events, interpreter: { map: appStore.editorMap } }, null, 2)}</pre>
 			</div>
 		{/if}
 	</div>
 
 	<!-- Live Preview -->
-	<div class="w-[380px] flex-shrink-0 overflow-y-auto p-5" style="background: rgba(0,0,0,0.1);">
+	<div class="w-95 shrink-0 overflow-y-auto p-5" style="background: rgba(0,0,0,0.1);">
 		<div class="mb-4 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
 			▸ Live Preview
 		</div>
