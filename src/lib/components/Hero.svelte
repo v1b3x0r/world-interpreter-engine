@@ -120,7 +120,7 @@
 				class="flex items-center gap-1.5 transition-opacity hover:opacity-100"
 				style="color: var(--wl-accent); opacity: 0.7;"
 			>
-				<span>ใช้จริงกับบ้านจริง →</span>
+				<span>See it run a real home →</span>
 			</a>
 
 			<span style="opacity: 0.2;">·</span>

@@ -10,7 +10,63 @@
 	import ScenarioPicker from '$lib/components/ScenarioPicker.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import Editor from '$lib/components/Editor.svelte';
+
+	const title = 'World Log — Turn Raw Events Into Human Stories';
+	const description =
+		'Open-source semantic layer engine that transforms IoT events, sensor data, and system logs into human-readable narratives. Same events, different interpreters, different stories.';
+	const url = 'https://worldlog.dev';
+	const ogImage = `${url}/og.png`;
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+	<meta name="description" content={description} />
+	<link rel="canonical" href={url} />
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:image" content={ogImage} />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@v1b3x0r" />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={ogImage} />
+
+	<!-- SEO hints -->
+	<meta name="robots" content="index, follow" />
+	<meta name="author" content="v1b3x0r" />
+	<meta
+		name="keywords"
+		content="world log, event interpreter, IoT narrative, semantic layer, smart home, sensor data, open source, event-driven, DreamFlow"
+	/>
+
+	<!-- JSON-LD Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareApplication',
+		name: 'World Log Engine',
+		description,
+		url,
+		applicationCategory: 'DeveloperApplication',
+		operatingSystem: 'Any',
+		license: 'https://opensource.org/licenses/MIT',
+		author: {
+			'@type': 'Person',
+			name: 'v1b3x0r',
+			url: 'https://x.com/v1b3x0r',
+		},
+		offers: {
+			'@type': 'Offer',
+			price: '0',
+			priceCurrency: 'USD',
+		},
+	})}</script>`}
+</svelte:head>
 
 {#if appStore.view === 'hero'}
 	<Hero />
