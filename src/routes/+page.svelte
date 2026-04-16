@@ -10,6 +10,7 @@
 	import ScenarioPicker from '$lib/components/ScenarioPicker.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import Editor from '$lib/components/Editor.svelte';
+	import LocaleSwitcher from '$lib/components/LocaleSwitcher.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 
 	const jsonLdDescription =
@@ -70,6 +71,11 @@
 		},
 	})}</script>`}
 </svelte:head>
+
+<!-- Locale switcher — fixed top-right on all views -->
+<div class="fixed top-4 right-4 z-50">
+	<LocaleSwitcher />
+</div>
 
 {#if appStore.view === 'hero'}
 	<Hero />
