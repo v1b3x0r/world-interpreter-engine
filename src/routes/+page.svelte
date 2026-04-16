@@ -1,74 +1,57 @@
 <script lang="ts">
-	import { render } from '$lib/composables/engine';
-	import { eventPreset, interpreters } from '$lib/composables/preset';
-	import { Button } from '@/lib/components/ui/button';
-
-	let eventsText = $state(eventPreset);
-	let interpreterText = $state(interpreters.home);
-
-	function safeParse(str: string) {
-		try {
-			return JSON.parse(str);
-		} catch {
-			return null;
-		}
-	}
-
-	let parsedEvents = $derived(safeParse(eventsText));
-	let parsedInterpreter = $derived(safeParse(interpreterText));
-
-	let output = $derived(
-		parsedEvents && parsedInterpreter ? render(parsedEvents, parsedInterpreter) : []
-	);
-
-	function loadPreset(name: keyof typeof interpreters) {
-		interpreterText = interpreters[name];
-	}
+	import {
+		view,
+		activeScenario,
+		output,
+		navigateTo,
+		goToEditor,
+	} from '$lib/composables/stores.svelte';
+	import Hero from '$lib/components/Hero.svelte';
+	import ScenarioPicker from '$lib/components/ScenarioPicker.svelte';
+	import Timeline from '$lib/components/Timeline.svelte';
+	import Editor from '$lib/components/Editor.svelte';
 </script>
 
-<div class="space-y-4 p-4">
-	<!-- 🔘 Preset Buttons -->
-	<div class="flex gap-2">
-		<Button onclick={() => loadPreset('home')}>🏠 Home</Button>
-		<Button onclick={() => loadPreset('rover')}>🛰 Rover</Button>
-		<Button onclick={() => loadPreset('cyberpunk')}>⚡ Cyberpunk</Button>
-	</div>
+{#if view === 'hero'}
+	<Hero />
+{:else if view === 'picker'}
+	<ScenarioPicker />
+{:else if view === 'timeline'}
+	<div class="flex min-h-screen flex-col px-6 py-8" style="background: var(--wl-bg);">
+		<button
+			class="mb-6 cursor-pointer self-start text-sm text-(--wl-text-muted) transition-opacity hover:opacity-80"
+			onclick={() => navigateTo('picker')}
+		>
+			◂ เลือกใหม่
+		</button>
 
-	<!-- 🧬 3 Columns -->
-	<div class="grid h-[80vh] grid-cols-3 gap-4">
-		<!-- Events -->
-		<div class="flex flex-col">
-			<div class="mb-2 text-sm opacity-60">Events</div>
-			<textarea
-				class="flex-1 rounded bg-black p-3 font-mono text-xs text-white"
-				bind:value={eventsText}
-			></textarea>
-		</div>
-
-		<!-- Interpreter -->
-		<div class="flex flex-col">
-			<div class="mb-2 text-sm opacity-60">Interpreter</div>
-			<textarea
-				class="flex-1 rounded bg-black p-3 font-mono text-xs text-white"
-				bind:value={interpreterText}
-			></textarea>
-		</div>
-
-		<!-- Output -->
-		<div class="flex flex-col">
-			<div class="mb-2 text-sm opacity-60">Output</div>
-
-			<div class="flex-1 space-y-2 overflow-auto rounded bg-neutral-900 p-3">
-				{#if output.length}
-					{#each output as line (line)}
-						<div class="rounded bg-neutral-800 p-2 text-sm">
-							{line}
-						</div>
-					{/each}
-				{:else}
-					<div class="text-sm opacity-40">Invalid JSON...</div>
-				{/if}
+		<div class="mb-6 flex items-center gap-3">
+			<span class="text-2xl">{activeScenario.icon}</span>
+			<div>
+				<h2 class="text-lg font-semibold text-(--wl-text)">{activeScenario.name}</h2>
+				<p class="text-xs text-(--wl-text-muted)">{activeScenario.story}</p>
 			</div>
 		</div>
+
+		<div class="mx-auto w-full max-w-xl flex-1">
+			<Timeline events={output} />
+		</div>
+
+		<div
+			class="mx-auto mt-8 flex w-full max-w-xl items-center justify-between border-t pt-4"
+			style="border-color: var(--wl-border);"
+		>
+			<span class="text-xs text-(--wl-text-muted)">
+				raw events → ถูกแปลงเป็นเรื่องด้วย interpreter
+			</span>
+			<button
+				class="cursor-pointer rounded-lg border border-(--wl-border-accent) bg-(--wl-accent-glow) px-5 py-2 text-sm font-medium text-(--wl-accent) transition-opacity hover:opacity-80"
+				onclick={() => goToEditor()}
+			>
+				ลองแก้ Interpreter →
+			</button>
+		</div>
 	</div>
-</div>
+{:else if view === 'editor'}
+	<Editor />
+{/if}
