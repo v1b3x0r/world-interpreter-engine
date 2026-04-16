@@ -10,10 +10,13 @@
 	import ScenarioPicker from '$lib/components/ScenarioPicker.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import Editor from '$lib/components/Editor.svelte';
+	import { m } from '$lib/paraglide/messages.js';
 
-	const title = 'World Log — Turn Raw Events Into Human Stories';
-	const description =
+	const jsonLdDescription =
 		'Open-source semantic layer engine that transforms IoT events, sensor data, and system logs into human-readable narratives. Same events, different interpreters, different stories.';
+
+	const title = $derived(m.meta_title());
+	const description = $derived(m.meta_description());
 	const url = 'https://worldlog.dev';
 	const ogImage = `${url}/og.png`;
 </script>
@@ -50,7 +53,7 @@
 		'@context': 'https://schema.org',
 		'@type': 'SoftwareApplication',
 		name: 'World Log Engine',
-		description,
+		description: jsonLdDescription,
 		url,
 		applicationCategory: 'DeveloperApplication',
 		operatingSystem: 'Any',
@@ -80,7 +83,7 @@
 			class="mb-6 cursor-pointer self-start text-sm text-(--wl-text-muted) transition-opacity hover:opacity-80"
 			onclick={() => navigateTo('picker')}
 		>
-			◂ เลือกใหม่
+			{m.timeline_back()}
 		</button>
 
 		<div class="mb-6 flex items-center gap-3">
@@ -100,13 +103,13 @@
 			style="border-color: var(--wl-border);"
 		>
 			<span class="text-xs text-(--wl-text-muted)">
-				raw events → ถูกแปลงเป็นเรื่องด้วย interpreter
+				{m.timeline_hint()}
 			</span>
 			<button
 				class="cursor-pointer rounded-lg border border-(--wl-border-accent) bg-(--wl-accent-glow) px-5 py-2 text-sm font-medium text-(--wl-accent) transition-opacity hover:opacity-80"
 				onclick={() => goToEditor()}
 			>
-				ลองแก้ Interpreter →
+				{m.timeline_cta_editor()}
 			</button>
 		</div>
 	</div>

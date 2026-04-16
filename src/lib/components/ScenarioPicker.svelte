@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { scenarioList } from '$lib/composables/scenarios';
 	import { navigateTo, selectScenario } from '$lib/composables/stores.svelte';
+	import { m } from '$lib/paraglide/messages.js';
 
 	const prefersReducedMotion =
 		typeof window !== 'undefined'
@@ -19,12 +20,12 @@
 		class="mb-6 cursor-pointer self-start text-sm text-[var(--wl-text-muted)] transition-opacity hover:opacity-80"
 		onclick={() => navigateTo('hero')}
 	>
-		◂ กลับ
-	</button>
+		{m.picker_back()}
+</button>
 
-	<h2 class="mb-2 text-xl font-semibold text-[var(--wl-text)]">เลือกโลกที่อยากฟัง</h2>
+	<h2 class="mb-2 text-xl font-semibold text-[var(--wl-text)]">{m.picker_title()}</h2>
 	<p class="mb-8 text-sm text-[var(--wl-text-muted)]">
-		แต่ละโลกมี events และ interpreter ของตัวเอง
+		{m.picker_subtitle()}
 	</p>
 
 	<div class="mx-auto grid w-full max-w-2xl grid-cols-2 gap-px" style="background: var(--wl-border);">

@@ -1,4 +1,36 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from en!"
+
+	"hero_tagline": "Everything has a story",
+	"hero_subtitle": "raw events → human stories",
+	"hero_context_home": "🏠 Home",
+	"hero_context_space": "🚀 Space",
+	"hero_cta_explore": "Explore a world →",
+	"hero_cta_editor": "Open Editor",
+	"hero_hint_explore": "Not sure yet? Start here",
+	"hero_hint_editor": "Already familiar? Jump in",
+
+	"footer_engine": "Engine",
+	"footer_live_demo": "See it run a real home →",
+	"footer_license": "MIT Licensed · World Log Engine",
+
+	"picker_title": "Choose a world to explore",
+	"picker_subtitle": "Each world has its own events and interpreter",
+	"picker_back": "◂ Back",
+
+	"timeline_back": "◂ Choose another",
+	"timeline_hint": "raw events → transformed into stories by the interpreter",
+	"timeline_cta_editor": "Try editing the Interpreter →",
+
+	"editor_sidebar_scenarios": "▸ Scenarios",
+	"editor_json_hide": "⟨/⟩ Hide JSON",
+	"editor_json_show": "⟨/⟩ View JSON",
+	"editor_reset": "↺ Reset to default",
+	"editor_back": "◂ Back to home",
+	"editor_templates_label": "▸ Templates — edit freely",
+	"editor_raw_json_label": "▸ Raw JSON",
+	"editor_preview_label": "▸ Live Preview",
+
+	"meta_title": "World Log — Turn Raw Events Into Human Stories",
+	"meta_description": "Open-source semantic layer engine that transforms IoT events, sensor data, and system logs into human-readable narratives. Same events, different interpreters, different stories."
 }

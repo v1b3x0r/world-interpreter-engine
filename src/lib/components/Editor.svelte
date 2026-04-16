@@ -13,6 +13,7 @@
 	import Timeline from './Timeline.svelte';
 	import TemplateField from './TemplateField.svelte';
 	import VariableChips from './VariableChips.svelte';
+	import { m } from '$lib/paraglide/messages.js';
 
 	const activeScenario = $derived(getActiveScenario());
 	const output = $derived(getOutput());
@@ -46,7 +47,7 @@
 		style="border-color: var(--wl-border); background: rgba(0,0,0,0.15);"
 	>
 		<div class="mb-3 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-			▸ Scenarios
+			{m.editor_sidebar_scenarios()}
 		</div>
 
 		{#each scenarioList as scenario (scenario.id)}
@@ -70,14 +71,14 @@
 			onclick={toggleJson}
 			aria-expanded={appStore.showJson}
 		>
-			⟨/⟩ {appStore.showJson ? 'ซ่อน' : 'ดู'} JSON
+			{appStore.showJson ? m.editor_json_hide() : m.editor_json_show()}
 		</button>
 
 		<button
 			class="cursor-pointer px-3 py-2 text-left text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80"
 			onclick={resetInterpreter}
 		>
-			↺ Reset to default
+			{m.editor_reset()}
 		</button>
 
 		<div class="mt-auto">
@@ -85,7 +86,7 @@
 				class="cursor-pointer text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80"
 				onclick={() => navigateTo('hero')}
 			>
-				◂ กลับหน้าแรก
+				{m.editor_back()}
 			</button>
 		</div>
 	</div>
@@ -93,7 +94,7 @@
 	<!-- Templates panel -->
 	<div class="flex-1 overflow-y-auto border-r p-5" style="border-color: var(--wl-border);">
 		<div class="mb-4 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-			▸ Templates — แก้ได้เลย
+			{m.editor_templates_label()}
 		</div>
 
 		<div class="flex flex-col gap-2">
@@ -117,7 +118,7 @@
 		{#if appStore.showJson}
 			<div class="mt-5">
 				<div class="mb-2 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-					▸ Raw JSON
+					{m.editor_raw_json_label()}
 				</div>
 				<pre
 					class="overflow-auto rounded-lg p-4 font-mono text-xs text-(--wl-text-muted)"
@@ -130,7 +131,7 @@
 	<!-- Live Preview -->
 	<div class="w-95 shrink-0 overflow-y-auto p-5" style="background: rgba(0,0,0,0.1);">
 		<div class="mb-4 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-			▸ Live Preview
+			{m.editor_preview_label()}
 		</div>
 		<Timeline events={output} animate={false} />
 	</div>

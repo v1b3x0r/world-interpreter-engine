@@ -1,4 +1,36 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from th!"
+
+	"hero_tagline": "ทุกสิ่งมีเรื่องเล่า",
+	"hero_subtitle": "raw events → เรื่องราวของมนุษย์",
+	"hero_context_home": "🏠 บ้าน",
+	"hero_context_space": "🚀 อวกาศ",
+	"hero_cta_explore": "เลือกโลกที่อยากฟัง →",
+	"hero_cta_editor": "เปิด Editor เลย",
+	"hero_hint_explore": "ยังไม่รู้จัก? เริ่มจากตรงนี้",
+	"hero_hint_editor": "รู้แล้ว? ข้ามไปเล่นเลย",
+
+	"footer_engine": "Engine",
+	"footer_live_demo": "ดูมันทำงานจริงที่บ้าน →",
+	"footer_license": "MIT Licensed · World Log Engine",
+
+	"picker_title": "เลือกโลกที่อยากฟัง",
+	"picker_subtitle": "แต่ละโลกมี events และ interpreter ของตัวเอง",
+	"picker_back": "◂ กลับ",
+
+	"timeline_back": "◂ เลือกใหม่",
+	"timeline_hint": "raw events → ถูกแปลงเป็นเรื่องด้วย interpreter",
+	"timeline_cta_editor": "ลองแก้ Interpreter →",
+
+	"editor_sidebar_scenarios": "▸ Scenarios",
+	"editor_json_hide": "⟨/⟩ ซ่อน JSON",
+	"editor_json_show": "⟨/⟩ ดู JSON",
+	"editor_reset": "↺ Reset to default",
+	"editor_back": "◂ กลับหน้าแรก",
+	"editor_templates_label": "▸ Templates — แก้ได้เลย",
+	"editor_raw_json_label": "▸ Raw JSON",
+	"editor_preview_label": "▸ Live Preview",
+
+	"meta_title": "World Log — แปลง Raw Events เป็นเรื่องราว",
+	"meta_description": "เครื่องมือ semantic layer แบบ open-source ที่แปลง IoT events, sensor data และ system logs ให้เป็นเรื่องเล่าที่มนุษย์อ่านได้ Events เดิม, interpreter ต่างกัน, เรื่องราวต่างกัน"
 }
