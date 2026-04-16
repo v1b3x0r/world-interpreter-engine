@@ -1,42 +1,78 @@
-# sv
+# World Interpreter Engine
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A minimal interpretation engine that turns real-world signals into meaningful, replayable events.
 
-## Creating a project
+## What is this?
 
-If you're seeing this, you've probably already done this step. Congrats!
+Most systems log data.
 
-```sh
-# create a new project
-npx sv create my-app
-```
+This system tries to log what actually happened.
 
-To recreate this project with the same configuration:
+It takes raw signals (like electricity usage) and interprets them into structured events,
+then renders them as a human-readable timeline.
 
-```sh
-# recreate this project
-npx sv@0.15.1 create --template minimal --types ts --add prettier eslint sveltekit-adapter="adapter:auto" tailwindcss="plugins:forms,typography" vitest="usages:unit,component" playwright paraglide="languageTags:en, th+demo:yes" mcp="ide:claude-code+setup:local" --install npm world-log-demo
-```
+Not just numbers.
+Not just logs.
 
-## Developing
+Memories.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Why?
 
-```sh
-npm run dev
+Because raw data is not useful on its own.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- 120W means nothing
+- 2 hours means nothing
 
-## Building
+But:
 
-To create a production version of your app:
+- "someone cooked"
+- "AC has been running too long"
+- "something abnormal happened"
 
-```sh
-npm run build
-```
+That is meaning.
 
-You can preview the production build with `npm run preview`.
+## How it works
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Signal → Event → Template → Narrative → Timeline
+
+- Raw JSON = what the system sees
+- Templates = how the system speaks
+- Timeline = what actually happened (interpreted)
+
+The core engine is intentionally small.
+Just a few lines of logic.
+
+The complexity comes from the world, not the code.
+
+## What this demo shows
+
+- A minimal interpretation layer
+- Event → narrative mapping
+- Real-time story generation from signals
+
+You are not looking at a dashboard.
+
+You are looking at a system describing reality.
+
+## Vision
+
+This is a small step toward a bigger idea:
+
+A replayable world.
+
+A system where:
+- environments remember themselves
+- events can be replayed as stories
+- reality becomes a structured, queryable timeline
+
+Not logs.
+
+A memory layer for the physical world.
+
+## Status
+
+Experimental.
+
+Probably overthinking things.
+
+But also maybe the right direction.
