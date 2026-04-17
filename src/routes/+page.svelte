@@ -71,10 +71,12 @@
 	})}</script>`}
 </svelte:head>
 
-<!-- Locale switcher — fixed top-right on all views -->
-<div class="fixed top-4 right-4 z-50">
-	<LocaleSwitcher />
-</div>
+<!-- Locale switcher — fixed top-right (hidden in editor, which has its own) -->
+{#if appStore.view !== 'editor'}
+	<div class="fixed top-4 right-4 z-50">
+		<LocaleSwitcher />
+	</div>
+{/if}
 
 {#if appStore.view === 'hero'}
 	<Hero />
