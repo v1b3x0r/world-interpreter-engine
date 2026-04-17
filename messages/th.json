@@ -1,28 +1,16 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 
-	"hero_tagline": "ทุกสิ่งมีเรื่องเล่า",
-	"hero_subtitle": "raw events → เรื่องราวของมนุษย์",
-	"hero_context_home": "🏠 บ้าน",
-	"hero_context_space": "🚀 อวกาศ",
-	"hero_cta_explore": "เลือกโลกที่อยากฟัง →",
-	"hero_cta_editor": "เปิด Editor เลย",
-	"hero_hint_explore": "ยังไม่รู้จัก? เริ่มจากตรงนี้",
-	"hero_hint_editor": "รู้แล้ว? ข้ามไปเล่นเลย",
-
 	"footer_engine": "Engine",
 	"footer_live_demo": "ดูมันทำงานจริงที่บ้าน →",
 	"footer_license": "MIT Licensed · World Log Engine",
-
-	"picker_title": "เลือกโลกที่อยากฟัง",
-	"picker_subtitle": "แต่ละโลกมี events และ interpreter ของตัวเอง",
-	"picker_back": "◂ กลับ",
 
 	"timeline_back": "◂ เลือกใหม่",
 	"timeline_hint": "raw events → ถูกแปลงเป็นเรื่องด้วย interpreter",
 	"timeline_cta_editor": "ลองแก้ Interpreter →",
 
-	"editor_sidebar_scenarios": "▸ Scenarios",
+	"editor_sidebar_worlds": "▸ Worlds",
+	"editor_star_github": "★ Star on GitHub",
 	"editor_json_hide": "⟨/⟩ ซ่อน JSON",
 	"editor_json_show": "⟨/⟩ ดู JSON",
 	"editor_reset": "↺ Reset to default",
@@ -38,6 +26,7 @@
 	"hero_headline": "Events เดียวกัน เรื่องราวต่างกัน",
 	"hero_description": "แปลง raw events เป็นเรื่องที่มนุษย์เข้าใจ เขียน interpreter ของคุณเอง — ข้อมูลเดิม เรื่องของคุณ",
 	"hero_cta_star": "★ Star on GitHub",
+	"hero_cta_editor": "เปิด Editor เลย",
 	"hero_scroll_hint": "เลื่อนเพื่อดูตัวอย่าง ↓",
 
 	"hero_demo_title": "หนึ่ง Event หลาย Interpreter",

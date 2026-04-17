@@ -1,28 +1,16 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 
-	"hero_tagline": "Everything has a story",
-	"hero_subtitle": "raw events → human stories",
-	"hero_context_home": "🏠 Home",
-	"hero_context_space": "🚀 Space",
-	"hero_cta_explore": "Explore a world →",
-	"hero_cta_editor": "Open Editor",
-	"hero_hint_explore": "Not sure yet? Start here",
-	"hero_hint_editor": "Already familiar? Jump in",
-
 	"footer_engine": "Engine",
 	"footer_live_demo": "See it run a real home →",
 	"footer_license": "MIT Licensed · World Log Engine",
-
-	"picker_title": "Choose a world to explore",
-	"picker_subtitle": "Each world has its own events and interpreter",
-	"picker_back": "◂ Back",
 
 	"timeline_back": "◂ Choose another",
 	"timeline_hint": "raw events → transformed into stories by the interpreter",
 	"timeline_cta_editor": "Try editing the Interpreter →",
 
-	"editor_sidebar_scenarios": "▸ Scenarios",
+	"editor_sidebar_worlds": "▸ Worlds",
+	"editor_star_github": "★ Star on GitHub",
 	"editor_json_hide": "⟨/⟩ Hide JSON",
 	"editor_json_show": "⟨/⟩ View JSON",
 	"editor_reset": "↺ Reset to default",
@@ -38,6 +26,7 @@
 	"hero_headline": "Same events. Different stories.",
 	"hero_description": "Turn raw events into stories humans understand. Write your own interpreter — same data, your story.",
 	"hero_cta_star": "★ Star on GitHub",
+	"hero_cta_editor": "Open Editor",
 	"hero_scroll_hint": "scroll to see it in action ↓",
 
 	"hero_demo_title": "One event. Many interpreters.",

@@ -13,6 +13,7 @@
 	import Timeline from './Timeline.svelte';
 	import TemplateField from './TemplateField.svelte';
 	import VariableChips from './VariableChips.svelte';
+	import LocaleSwitcher from './LocaleSwitcher.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 
 	const activeScenario = $derived(getActiveScenario());
@@ -47,15 +48,14 @@
 		style="border-color: var(--wl-border); background: rgba(0,0,0,0.15);"
 	>
 		<div class="mb-3 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-			{m.editor_sidebar_scenarios()}
+			{m.editor_sidebar_worlds()}
 		</div>
 
 		{#each getScenarioListForLocale() as scenario (scenario.id)}
 			<button
 				class="mb-1 flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors"
-				class:text-[var(--wl-accent)]={appStore.activeScenarioId === scenario.id}
 				style={appStore.activeScenarioId === scenario.id
-					? 'background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.15);'
+					? `background: ${scenario.accent.replace(',1)', ',0.08)')}; border: 1px solid ${scenario.accent.replace(',1)', ',0.2)')}; color: ${scenario.accent};`
 					: 'opacity: 0.4; border: 1px solid transparent;'}
 				onclick={() => selectScenario(scenario.id)}
 			>
@@ -81,7 +81,16 @@
 			{m.editor_reset()}
 		</button>
 
-		<div class="mt-auto">
+		<div class="mt-auto flex flex-col gap-2">
+			<a
+				href="https://github.com/v1b3x0r/world-interpreter-engine"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="rounded-md border px-3 py-2 text-center text-xs font-medium transition-opacity hover:opacity-80"
+				style="border-color: var(--wl-border-accent); color: var(--wl-accent);"
+			>
+				{m.editor_star_github()}
+			</a>
 			<button
 				class="cursor-pointer text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80"
 				onclick={() => navigateTo('hero')}
@@ -130,8 +139,11 @@
 
 	<!-- Live Preview -->
 	<div class="w-95 shrink-0 overflow-y-auto p-5" style="background: rgba(0,0,0,0.1);">
-		<div class="mb-4 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-			{m.editor_preview_label()}
+		<div class="mb-4 flex items-center justify-between">
+			<div class="text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
+				{m.editor_preview_label()}
+			</div>
+			<LocaleSwitcher />
 		</div>
 		<Timeline events={output} animate={false} />
 	</div>
