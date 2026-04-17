@@ -32,5 +32,22 @@
 	"editor_preview_label": "▸ Live Preview",
 
 	"meta_title": "World Log — Turn Raw Events Into Human Stories",
-	"meta_description": "Open-source semantic layer engine that transforms IoT events, sensor data, and system logs into human-readable narratives. Same events, different interpreters, different stories."
+	"meta_description": "Open-source semantic layer engine that transforms IoT events, sensor data, and system logs into human-readable narratives. Same events, different interpreters, different stories.",
+
+	"hero_brand": "WORLD LOG ENGINE",
+	"hero_headline": "Same events. Different stories.",
+	"hero_description": "Turn raw events into stories humans understand. Write your own interpreter — same data, your story.",
+	"hero_cta_star": "★ Star on GitHub",
+	"hero_scroll_hint": "scroll to see it in action ↓",
+
+	"hero_demo_title": "One event. Many interpreters.",
+	"hero_demo_tagline": "The data doesn't change. Only the meaning does.",
+
+	"hero_pattern_title": "Same structure. Every world.",
+	"hero_pattern_subtitle": "Humans arrive, devices run, anomalies happen — everywhere.",
+
+	"hero_final_title": "Write your own interpreter.",
+	"hero_final_subtitle": "Open the IDE, pick a world, edit the templates. See how the same events become your story.",
+	"hero_final_cta_editor": "Open the IDE →",
+	"hero_final_cta_star": "★ Star on GitHub"
 }

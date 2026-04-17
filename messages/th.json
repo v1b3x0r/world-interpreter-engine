@@ -32,5 +32,22 @@
 	"editor_preview_label": "▸ Live Preview",
 
 	"meta_title": "World Log — แปลง Raw Events เป็นเรื่องราว",
-	"meta_description": "เครื่องมือ semantic layer แบบ open-source ที่แปลง IoT events, sensor data และ system logs ให้เป็นเรื่องเล่าที่มนุษย์อ่านได้ Events เดิม, interpreter ต่างกัน, เรื่องราวต่างกัน"
+	"meta_description": "เครื่องมือ semantic layer แบบ open-source ที่แปลง IoT events, sensor data และ system logs ให้เป็นเรื่องเล่าที่มนุษย์อ่านได้ Events เดิม, interpreter ต่างกัน, เรื่องราวต่างกัน",
+
+	"hero_brand": "WORLD LOG ENGINE",
+	"hero_headline": "Events เดียวกัน เรื่องราวต่างกัน",
+	"hero_description": "แปลง raw events เป็นเรื่องที่มนุษย์เข้าใจ เขียน interpreter ของคุณเอง — ข้อมูลเดิม เรื่องของคุณ",
+	"hero_cta_star": "★ Star on GitHub",
+	"hero_scroll_hint": "เลื่อนเพื่อดูตัวอย่าง ↓",
+
+	"hero_demo_title": "หนึ่ง Event หลาย Interpreter",
+	"hero_demo_tagline": "ข้อมูลไม่เปลี่ยน เปลี่ยนแค่ความหมาย",
+
+	"hero_pattern_title": "โครงสร้างเดียวกัน ทุกโลก",
+	"hero_pattern_subtitle": "คนมาถึง อุปกรณ์ทำงาน เหตุผิดปกติเกิดขึ้น — ทุกที่",
+
+	"hero_final_title": "เขียน Interpreter ของคุณเอง",
+	"hero_final_subtitle": "เปิด IDE เลือกโลก แก้ template ดูว่า events เดิมกลายเป็นเรื่องของคุณยังไง",
+	"hero_final_cta_editor": "เปิด IDE →",
+	"hero_final_cta_star": "★ Star on GitHub"
 }
