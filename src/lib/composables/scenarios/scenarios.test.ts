@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { getScenarios, getScenarioList } from './index';
 import { home } from './home';
 import { cafe } from './cafe';
 import { factory } from './factory';
@@ -103,5 +104,32 @@ describe('humanoid scenario', () => {
 	it('has correct accent and tone', () => {
 		expect(humanoid.en.accent).toBe('rgba(244,114,182,1)');
 		expect(humanoid.en.interpreter.tone).toBe('industrial');
+	});
+});
+
+describe('scenario index', () => {
+	it('getScenarios returns all 8 scenarios for en', () => {
+		const s = getScenarios('en');
+		expect(Object.keys(s)).toHaveLength(8);
+		expect(s.home.name).toBe('Home');
+		expect(s.car.name).toBe('Autonomous Car');
+		expect(s.humanoid.name).toBe('Humanoid');
+	});
+
+	it('getScenarios returns all 8 scenarios for th', () => {
+		const s = getScenarios('th');
+		expect(Object.keys(s)).toHaveLength(8);
+		expect(s.home.name).toBe('บ้าน');
+	});
+
+	it('getScenarioList returns ordered array of 8', () => {
+		const list = getScenarioList('en');
+		expect(list).toHaveLength(8);
+		expect(list[0].id).toBe('home');
+	});
+
+	it('falls back to en for unknown locale', () => {
+		const s = getScenarios('fr');
+		expect(s.home.name).toBe('Home');
 	});
 });
