@@ -10,6 +10,7 @@
 		navigateTo,
 	} from '$lib/composables/stores.svelte';
 	import { EVENT_TYPES } from '$lib/composables/scenarios/event-types';
+	import { render } from '$lib/composables/engine';
 	import Timeline from './Timeline.svelte';
 	import TemplateField from './TemplateField.svelte';
 	import VariableChips from './VariableChips.svelte';
@@ -18,6 +19,26 @@
 
 	const activeScenario = $derived(getActiveScenario());
 	const output = $derived(getOutput());
+
+	// Preview for ALL template types — fill in placeholders for types missing from scenario events
+	const fullPreview = $derived.by(() => {
+		const coveredTypes = new Set(output.map((e) => e.type));
+		const placeholders = EVENT_TYPES.filter((et) => !coveredTypes.has(et.type)).map((et) => ({
+			type: et.type,
+			timestamp: '--:--',
+			actor: 'Someone',
+			device: 'Device',
+			zone: 'Zone',
+			duration_min: 30,
+		}));
+		if (placeholders.length === 0) return output;
+		const interpreter = {
+			name: 'editor',
+			tone: activeScenario.interpreter.tone,
+			map: appStore.editorMap,
+		} as const;
+		return [...output, ...render(placeholders, interpreter)];
+	});
 
 	function handleInsert(variable: string) {
 		const activeEl = document.activeElement;
@@ -156,7 +177,7 @@
 				</div>
 				<LocaleSwitcher />
 			</div>
-			<Timeline events={output} animate={false} />
+			<Timeline events={fullPreview} animate={false} />
 		</div>
 	</div>
 </div>
