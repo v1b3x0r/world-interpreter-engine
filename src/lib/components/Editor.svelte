@@ -3,12 +3,12 @@
 		appStore,
 		getActiveScenario,
 		getOutput,
+		getScenarioListForLocale,
 		selectScenario,
 		toggleJson,
 		resetInterpreter,
 		navigateTo,
 	} from '$lib/composables/stores.svelte';
-	import { scenarioList } from '$lib/composables/scenarios';
 	import { EVENT_TYPES } from '$lib/composables/scenarios/event-types';
 	import Timeline from './Timeline.svelte';
 	import TemplateField from './TemplateField.svelte';
@@ -50,7 +50,7 @@
 			{m.editor_sidebar_scenarios()}
 		</div>
 
-		{#each scenarioList as scenario (scenario.id)}
+		{#each getScenarioListForLocale() as scenario (scenario.id)}
 			<button
 				class="mb-1 flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors"
 				class:text-[var(--wl-accent)]={appStore.activeScenarioId === scenario.id}

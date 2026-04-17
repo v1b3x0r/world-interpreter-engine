@@ -7,7 +7,6 @@
 		goToEditor,
 	} from '$lib/composables/stores.svelte';
 	import Hero from '$lib/components/Hero.svelte';
-	import ScenarioPicker from '$lib/components/ScenarioPicker.svelte';
 	import Timeline from '$lib/components/Timeline.svelte';
 	import Editor from '$lib/components/Editor.svelte';
 	import LocaleSwitcher from '$lib/components/LocaleSwitcher.svelte';
@@ -79,15 +78,13 @@
 
 {#if appStore.view === 'hero'}
 	<Hero />
-{:else if appStore.view === 'picker'}
-	<ScenarioPicker />
 {:else if appStore.view === 'timeline'}
 	{@const activeScenario = getActiveScenario()}
 	{@const output = getOutput()}
 	<div class="flex min-h-screen flex-col px-6 py-8" style="background: var(--wl-bg);">
 		<button
 			class="mb-6 cursor-pointer self-start text-sm text-(--wl-text-muted) transition-opacity hover:opacity-80"
-			onclick={() => navigateTo('picker')}
+			onclick={() => navigateTo('hero')}
 		>
 			{m.timeline_back()}
 		</button>

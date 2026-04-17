@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { fly, fade } from 'svelte/transition';
 	import { render } from '$lib/composables/engine';
-	import { scenarios } from '$lib/composables/scenarios';
+	import { getScenarios } from '$lib/composables/scenarios';
+	import { getLocale } from '$lib/paraglide/runtime';
 	import { navigateTo, goToEditor } from '$lib/composables/stores.svelte';
 	import TimelineEvent from './TimelineEvent.svelte';
 	import { m } from '$lib/paraglide/messages.js';
 
-	const homeEvents = scenarios.home.events.slice(0, 4);
-	const homePreview = render(homeEvents, scenarios.home.interpreter);
+	const currentScenarios = $derived(getScenarios(getLocale()));
+	const homeEvents = $derived(currentScenarios.home.events.slice(0, 4));
+	const homePreview = $derived(render(homeEvents, currentScenarios.home.interpreter));
 
-	const punchEvent = scenarios.home.events.find((e) => e.type === 'presence.arrived')!;
-	const punchHome = render([punchEvent], scenarios.home.interpreter)[0];
-	const punchSpace = render([punchEvent], scenarios.space.interpreter)[0];
+	const punchEvent = $derived(currentScenarios.home.events.find((e) => e.type === 'presence.arrived')!);
+	const punchHome = $derived(render([punchEvent], currentScenarios.home.interpreter)[0]);
+	const punchSpace = $derived(render([punchEvent], currentScenarios.space.interpreter)[0]);
 
 	let showPunch = $state(false);
 
@@ -77,7 +79,7 @@
 	<div class="relative flex gap-3">
 		<button
 			class="cursor-pointer rounded-xl border border-[var(--wl-border-accent)] bg-[var(--wl-accent-glow)] px-7 py-3 font-semibold text-[var(--wl-accent)] transition-opacity hover:opacity-80"
-			onclick={() => navigateTo('picker')}
+			onclick={() => navigateTo('editor')}
 		>
 			{m.hero_cta_explore()}
 		</button>

@@ -1,27 +1,35 @@
 // src/lib/composables/stores.svelte.ts
-import { scenarios } from './scenarios';
+import { getScenarios, getScenarioList } from './scenarios';
+import { getLocale } from '$lib/paraglide/runtime';
 import { render } from './engine';
 import type { RenderedEvent, Scenario } from './scenarios/types';
 
-export type AppView = 'hero' | 'picker' | 'timeline' | 'editor';
+export type AppView = 'hero' | 'timeline' | 'editor';
 
-// Reactive state — use object to avoid "cannot export reassigned $state"
 const store = $state({
 	view: 'hero' as AppView,
 	activeScenarioId: 'home',
-	editorMap: { ...scenarios.home.interpreter.map } as Record<string, string>,
+	editorMap: {} as Record<string, string>,
 	showJson: false,
+});
+
+// Initialize editorMap from default scenario
+$effect.root(() => {
+	const scenarios = getScenarios(getLocale());
+	if (Object.keys(store.editorMap).length === 0) {
+		store.editorMap = { ...scenarios.home.interpreter.map };
+	}
 });
 
 export const appStore = store;
 
-// Derived values exposed as getter functions (Svelte 5 forbids exporting $derived from modules)
 export function getActiveScenario(): Scenario {
+	const scenarios = getScenarios(getLocale());
 	return scenarios[store.activeScenarioId];
 }
 
 export function getOutput(): RenderedEvent[] {
-	const scenario = scenarios[store.activeScenarioId];
+	const scenario = getActiveScenario();
 	return render(scenario.events, {
 		name: 'editor',
 		tone: scenario.interpreter.tone,
@@ -29,8 +37,12 @@ export function getOutput(): RenderedEvent[] {
 	});
 }
 
-// Actions
+export function getScenarioListForLocale(): Scenario[] {
+	return getScenarioList(getLocale());
+}
+
 export function selectScenario(id: string) {
+	const scenarios = getScenarios(getLocale());
 	store.activeScenarioId = id;
 	store.editorMap = { ...scenarios[id].interpreter.map };
 }
@@ -52,6 +64,6 @@ export function toggleJson() {
 }
 
 export function resetInterpreter() {
-	const scenario = scenarios[store.activeScenarioId];
-	store.editorMap = { ...scenario.interpreter.map };
+	const scenarios = getScenarios(getLocale());
+	store.editorMap = { ...scenarios[store.activeScenarioId].interpreter.map };
 }
