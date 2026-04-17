@@ -41,7 +41,7 @@
 	--sidebar-border: oklch(0.922 0.005 34.3);
 	--sidebar-ring: oklch(0.714 0.014 41.2);
 	/* World Log SciFi tokens */
-	--wl-bg: #0a0e1a;
+	--wl-bg: #080c08;
 	--wl-surface: #1E293B;
 	--wl-surface-2: #334155;
 	--wl-accent: #22c55e;
@@ -87,7 +87,7 @@
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.547 0.021 43.1);
 	/* World Log SciFi tokens */
-	--wl-bg: #0a0e1a;
+	--wl-bg: #080c08;
 	--wl-surface: #1E293B;
 	--wl-surface-2: #334155;
 	--wl-accent: #22c55e;
