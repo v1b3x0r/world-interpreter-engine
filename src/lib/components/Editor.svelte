@@ -20,10 +20,10 @@
 	const activeScenario = $derived(getActiveScenario());
 	const output = $derived(getOutput());
 
-	// Preview for ALL template types — fill in placeholders for types missing from scenario events
-	const fullPreview = $derived.by(() => {
-		const coveredTypes = new Set(output.map((e) => e.type));
-		const placeholders = EVENT_TYPES.filter((et) => !coveredTypes.has(et.type)).map((et) => ({
+	// Placeholder events for template types missing from scenario
+	const placeholderEvents = $derived.by(() => {
+		const coveredTypes = new Set(activeScenario.events.map((e) => e.type));
+		return EVENT_TYPES.filter((et) => !coveredTypes.has(et.type)).map((et) => ({
 			type: et.type,
 			timestamp: '--:--',
 			actor: 'Someone',
@@ -31,13 +31,19 @@
 			zone: 'Zone',
 			duration_min: 30,
 		}));
-		if (placeholders.length === 0) return output;
+	});
+
+	const allEvents = $derived([...activeScenario.events, ...placeholderEvents]);
+
+	// Preview for ALL template types
+	const fullPreview = $derived.by(() => {
+		if (placeholderEvents.length === 0) return output;
 		const interpreter = {
 			name: 'editor',
 			tone: activeScenario.interpreter.tone,
 			map: appStore.editorMap,
 		} as const;
-		return [...output, ...render(placeholders, interpreter)];
+		return [...output, ...render(placeholderEvents, interpreter)];
 	});
 
 	function handleInsert(variable: string) {
@@ -164,7 +170,7 @@
 					<pre
 						class="overflow-auto rounded-lg p-4 font-mono text-xs text-(--wl-text-muted)"
 						style="background: rgba(0,0,0,0.3);"
-					>{JSON.stringify({ events: activeScenario.events, interpreter: { map: appStore.editorMap } }, null, 2)}</pre>
+					>{JSON.stringify({ events: allEvents, interpreter: { map: appStore.editorMap } }, null, 2)}</pre>
 				</div>
 			{/if}
 		</div>
