@@ -26,6 +26,7 @@ export type Scenario = {
 	icon: string;
 	description: string;
 	story: string;
+	accent: string;
 	events: WorldEvent[];
 	interpreter: Interpreter;
 };
