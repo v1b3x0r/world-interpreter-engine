@@ -41,33 +41,42 @@
 	}
 </script>
 
-<div class="flex h-screen" style="background: var(--wl-bg);">
-	<!-- Sidebar -->
+<div class="flex h-screen flex-col md:flex-row" style="background: var(--wl-bg);">
+	<!-- Sidebar: horizontal strip on mobile, vertical column on desktop -->
 	<div
-		class="flex w-50 shrink-0 flex-col border-r p-4"
+		class="flex shrink-0 gap-1 overflow-x-auto border-b px-3 py-2 md:w-50 md:flex-col md:overflow-x-visible md:overflow-y-auto md:border-r md:border-b-0 md:p-4"
 		style="border-color: var(--wl-border); background: rgba(0,0,0,0.15);"
 	>
-		<div class="mb-3 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
+		<div class="hidden text-[10px] uppercase tracking-widest text-(--wl-text-muted) md:mb-3 md:block">
 			{m.editor_sidebar_worlds()}
 		</div>
 
+		<!-- Back button (mobile: inline, desktop: bottom) -->
+		<button
+			class="shrink-0 cursor-pointer rounded-md px-2 py-1.5 text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80 md:hidden"
+			onclick={() => navigateTo('hero')}
+		>
+			◂
+		</button>
+
 		{#each getScenarioListForLocale() as scenario (scenario.id)}
 			<button
-				class="mb-1 flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors"
+				class="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-left text-sm transition-colors md:mb-1 md:gap-2 md:px-3 md:py-2"
 				style={appStore.activeScenarioId === scenario.id
 					? `background: ${scenario.accent.replace(',1)', ',0.08)')}; border: 1px solid ${scenario.accent.replace(',1)', ',0.2)')}; color: ${scenario.accent};`
 					: 'opacity: 0.4; border: 1px solid transparent;'}
 				onclick={() => selectScenario(scenario.id)}
 			>
 				<span class="text-base">{scenario.icon}</span>
-				<span>{scenario.name}</span>
+				<span class="hidden md:inline">{scenario.name}</span>
 			</button>
 		{/each}
 
-		<div class="my-3 h-px" style="background: var(--wl-border);"></div>
+		<!-- Desktop-only controls -->
+		<div class="my-3 hidden h-px md:block" style="background: var(--wl-border);"></div>
 
 		<button
-			class="cursor-pointer px-3 py-2 text-left text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80"
+			class="hidden cursor-pointer px-3 py-2 text-left text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80 md:block"
 			onclick={toggleJson}
 			aria-expanded={appStore.showJson}
 		>
@@ -75,13 +84,13 @@
 		</button>
 
 		<button
-			class="cursor-pointer px-3 py-2 text-left text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80"
+			class="hidden cursor-pointer px-3 py-2 text-left text-xs text-(--wl-text-muted) transition-opacity hover:opacity-80 md:block"
 			onclick={resetInterpreter}
 		>
 			{m.editor_reset()}
 		</button>
 
-		<div class="mt-auto flex flex-col gap-2">
+		<div class="mt-auto hidden flex-col gap-2 md:flex">
 			<a
 				href="https://github.com/v1b3x0r/world-interpreter-engine"
 				target="_blank"
@@ -100,51 +109,54 @@
 		</div>
 	</div>
 
-	<!-- Templates panel -->
-	<div class="flex-1 overflow-y-auto border-r p-5" style="border-color: var(--wl-border);">
-		<div class="mb-4 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-			{m.editor_templates_label()}
-		</div>
+	<!-- Main content: stacked on mobile, side-by-side on desktop -->
+	<div class="flex min-h-0 flex-1 flex-col md:flex-row">
+		<!-- Templates panel -->
+		<div class="flex-1 overflow-y-auto border-b p-4 md:border-r md:border-b-0 md:p-5" style="border-color: var(--wl-border);">
+			<div class="mb-4 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
+				{m.editor_templates_label()}
+			</div>
 
-		<div class="flex flex-col gap-2">
-			{#each EVENT_TYPES as meta (meta.type)}
-				<div data-type={meta.type}>
-					<TemplateField
-						{meta}
-						value={appStore.editorMap[meta.type] ?? ''}
-						onchange={(val) => {
-							appStore.editorMap[meta.type] = val;
-						}}
-					/>
-				</div>
-			{/each}
-		</div>
+			<div class="flex flex-col gap-2">
+				{#each EVENT_TYPES as meta (meta.type)}
+					<div data-type={meta.type}>
+						<TemplateField
+							{meta}
+							value={appStore.editorMap[meta.type] ?? ''}
+							onchange={(val) => {
+								appStore.editorMap[meta.type] = val;
+							}}
+						/>
+					</div>
+				{/each}
+			</div>
 
-		<div class="mt-5">
-			<VariableChips oninsert={handleInsert} />
-		</div>
-
-		{#if appStore.showJson}
 			<div class="mt-5">
-				<div class="mb-2 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-					{m.editor_raw_json_label()}
-				</div>
-				<pre
-					class="overflow-auto rounded-lg p-4 font-mono text-xs text-(--wl-text-muted)"
-					style="background: rgba(0,0,0,0.3);"
-				>{JSON.stringify({ events: activeScenario.events, interpreter: { map: appStore.editorMap } }, null, 2)}</pre>
+				<VariableChips oninsert={handleInsert} />
 			</div>
-		{/if}
-	</div>
 
-	<!-- Live Preview -->
-	<div class="w-95 shrink-0 overflow-y-auto p-5" style="background: rgba(0,0,0,0.1);">
-		<div class="mb-4 flex items-center justify-between">
-			<div class="text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
-				{m.editor_preview_label()}
-			</div>
-			<LocaleSwitcher />
+			{#if appStore.showJson}
+				<div class="mt-5">
+					<div class="mb-2 text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
+						{m.editor_raw_json_label()}
+					</div>
+					<pre
+						class="overflow-auto rounded-lg p-4 font-mono text-xs text-(--wl-text-muted)"
+						style="background: rgba(0,0,0,0.3);"
+					>{JSON.stringify({ events: activeScenario.events, interpreter: { map: appStore.editorMap } }, null, 2)}</pre>
+				</div>
+			{/if}
 		</div>
-		<Timeline events={output} animate={false} />
+
+		<!-- Live Preview -->
+		<div class="min-h-0 flex-1 overflow-y-auto p-4 md:w-95 md:flex-none md:p-5" style="background: rgba(0,0,0,0.1);">
+			<div class="mb-4 flex items-center justify-between">
+				<div class="text-[10px] uppercase tracking-widest text-(--wl-text-muted)">
+					{m.editor_preview_label()}
+				</div>
+				<LocaleSwitcher />
+			</div>
+			<Timeline events={output} animate={false} />
+		</div>
 	</div>
 </div>
